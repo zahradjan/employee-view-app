@@ -1,10 +1,14 @@
+import 'package:floor/floor.dart';
+
+@entity
 class Employee {
+  @primaryKey
   int id;
   String name;
   String department;
   int salary;
   String photoUrl;
-  Employee(this.id, this.name, this.department, this.salary, this.photoUrl) {}
+  Employee(this.id, this.name, this.department, this.salary, this.photoUrl);
 
   toJson() => {
         'id': id,
