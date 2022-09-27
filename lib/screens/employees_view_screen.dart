@@ -12,6 +12,16 @@ class EmployeesViewScreen extends StatefulWidget {
 class _EmployeesViewScreenState extends State<EmployeesViewScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: buildAppBar(),
+    );
   }
+}
+
+AppBar buildAppBar() {
+  return AppBar(
+    title: Row(
+      children: [Text("Employees")],
+    ),
+  );
 }

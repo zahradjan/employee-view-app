@@ -103,7 +103,7 @@ class _$EmployeeDao extends EmployeeDao {
   _$EmployeeDao(
     this.database,
     this.changeListener,
-  )   : _queryAdapter = QueryAdapter(database, changeListener),
+  )   : _queryAdapter = QueryAdapter(database),
         _employeeInsertionAdapter = InsertionAdapter(
             database,
             'Employee',
@@ -113,8 +113,7 @@ class _$EmployeeDao extends EmployeeDao {
                   'department': item.department,
                   'salary': item.salary,
                   'photoUrl': item.photoUrl
-                },
-            changeListener);
+                });
 
   final sqflite.DatabaseExecutor database;
 
@@ -125,45 +124,38 @@ class _$EmployeeDao extends EmployeeDao {
   final InsertionAdapter<Employee> _employeeInsertionAdapter;
 
   @override
-  Stream<List<Employee>> getAllEmployees() {
-    return _queryAdapter.queryListStream('SELECT * FROM Employee',
+  Future<List<Employee>> getAllEmployees() async {
+    return _queryAdapter.queryList('SELECT * FROM Employee',
         mapper: (Map<String, Object?> row) => Employee(
             row['id'] as int,
             row['name'] as String,
             row['department'] as String,
             row['salary'] as int,
-            row['photoUrl'] as String),
-        queryableName: 'Employee',
-        isView: false);
+            row['photoUrl'] as String));
   }
 
   @override
-  Stream<Employee?> getEmployeeById(int id) {
-    return _queryAdapter.queryStream('SELECT * FROM Employee WHERE id=?1',
+  Future<Employee?> getEmployeeById(int id) async {
+    return _queryAdapter.query('SELECT * FROM Employee WHERE id=?1',
         mapper: (Map<String, Object?> row) => Employee(
             row['id'] as int,
             row['name'] as String,
             row['department'] as String,
             row['salary'] as int,
             row['photoUrl'] as String),
-        arguments: [id],
-        queryableName: 'Employee',
-        isView: false);
+        arguments: [id]);
   }
 
   @override
-  Stream<Employee?> getPhotoOfEmployee(int id) {
-    return _queryAdapter.queryStream(
-        'SELECT photoUrl FROM Employee WHERE id=?1',
+  Future<Employee?> getPhotoOfEmployee(int id) async {
+    return _queryAdapter.query('SELECT photoUrl FROM Employee WHERE id=?1',
         mapper: (Map<String, Object?> row) => Employee(
             row['id'] as int,
             row['name'] as String,
             row['department'] as String,
             row['salary'] as int,
             row['photoUrl'] as String),
-        arguments: [id],
-        queryableName: 'Employee',
-        isView: false);
+        arguments: [id]);
   }
 
   @override
