@@ -85,7 +85,7 @@ class _$AppDatabase extends AppDatabase {
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `Employee` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `department` TEXT NOT NULL, `salary` INTEGER NOT NULL, `photoUrl` TEXT NOT NULL, PRIMARY KEY (`id`))');
+            'CREATE TABLE IF NOT EXISTS `Employee` (`id` INTEGER, `name` TEXT, `department` TEXT, `salary` INTEGER, `photoUrl` TEXT, PRIMARY KEY (`id`))');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -127,22 +127,22 @@ class _$EmployeeDao extends EmployeeDao {
   Future<List<Employee>> getAllEmployees() async {
     return _queryAdapter.queryList('SELECT * FROM Employee',
         mapper: (Map<String, Object?> row) => Employee(
-            row['id'] as int,
-            row['name'] as String,
-            row['department'] as String,
-            row['salary'] as int,
-            row['photoUrl'] as String));
+            id: row['id'] as int?,
+            name: row['name'] as String?,
+            department: row['department'] as String?,
+            salary: row['salary'] as int?,
+            photoUrl: row['photoUrl'] as String?));
   }
 
   @override
   Future<Employee?> getEmployeeById(int id) async {
     return _queryAdapter.query('SELECT * FROM Employee WHERE id=?1',
         mapper: (Map<String, Object?> row) => Employee(
-            row['id'] as int,
-            row['name'] as String,
-            row['department'] as String,
-            row['salary'] as int,
-            row['photoUrl'] as String),
+            id: row['id'] as int?,
+            name: row['name'] as String?,
+            department: row['department'] as String?,
+            salary: row['salary'] as int?,
+            photoUrl: row['photoUrl'] as String?),
         arguments: [id]);
   }
 
@@ -150,11 +150,11 @@ class _$EmployeeDao extends EmployeeDao {
   Future<Employee?> getPhotoOfEmployee(int id) async {
     return _queryAdapter.query('SELECT photoUrl FROM Employee WHERE id=?1',
         mapper: (Map<String, Object?> row) => Employee(
-            row['id'] as int,
-            row['name'] as String,
-            row['department'] as String,
-            row['salary'] as int,
-            row['photoUrl'] as String),
+            id: row['id'] as int?,
+            name: row['name'] as String?,
+            department: row['department'] as String?,
+            salary: row['salary'] as int?,
+            photoUrl: row['photoUrl'] as String?),
         arguments: [id]);
   }
 
