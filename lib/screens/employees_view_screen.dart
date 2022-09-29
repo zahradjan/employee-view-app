@@ -58,7 +58,7 @@ AppBar buildAppBar() {
           alignment: Alignment.centerLeft,
           iconSize: 50,
           onPressed: () {
-            Get.to(() => const NewEmployeeCard());
+            Get.to(() => NewEmployeeCard());
           },
           icon: const Icon(
             Icons.add,

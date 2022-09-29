@@ -11,6 +11,15 @@ class EmployeesController extends GetxController {
   EmployeeProvider employeeProvider = EmployeeProvider();
   EmployeeDao? employeeDao;
   var isDataFetching = false.obs;
+
+  var isImagePathSet = false.obs;
+  var imagePath = "".obs;
+
+  void setProfileImagePath(String path) {
+    imagePath.value = path;
+    isImagePathSet.value = true;
+  }
+
   @override
   Future<void> onInit() async {
     super.onInit();
