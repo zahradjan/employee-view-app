@@ -77,6 +77,24 @@ class _EmployeeProfileCardState extends State<EmployeeProfileCard> {
               ],
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20, bottom: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text("Address",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(fontSize: 20)),
+                widget.employee.address != null
+                    ? Text(widget.employee.address!,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(fontSize: 20))
+                    : Container(),
+              ],
+            ),
+          ),
         ]));
   }
 }

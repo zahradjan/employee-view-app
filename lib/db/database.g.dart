@@ -85,7 +85,7 @@ class _$AppDatabase extends AppDatabase {
       },
       onCreate: (database, version) async {
         await database.execute(
-            'CREATE TABLE IF NOT EXISTS `Employee` (`id` INTEGER, `name` TEXT, `department` TEXT, `salary` INTEGER, `photoUrl` TEXT, PRIMARY KEY (`id`))');
+            'CREATE TABLE IF NOT EXISTS `Employee` (`id` INTEGER, `name` TEXT, `address` TEXT, `department` TEXT, `salary` INTEGER, `photoUrl` TEXT, PRIMARY KEY (`id`))');
 
         await callback?.onCreate?.call(database, version);
       },
@@ -110,6 +110,7 @@ class _$EmployeeDao extends EmployeeDao {
             (Employee item) => <String, Object?>{
                   'id': item.id,
                   'name': item.name,
+                  'address': item.address,
                   'department': item.department,
                   'salary': item.salary,
                   'photoUrl': item.photoUrl
@@ -129,6 +130,7 @@ class _$EmployeeDao extends EmployeeDao {
         mapper: (Map<String, Object?> row) => Employee(
             id: row['id'] as int?,
             name: row['name'] as String?,
+            address: row['address'] as String?,
             department: row['department'] as String?,
             salary: row['salary'] as int?,
             photoUrl: row['photoUrl'] as String?));
@@ -140,6 +142,7 @@ class _$EmployeeDao extends EmployeeDao {
         mapper: (Map<String, Object?> row) => Employee(
             id: row['id'] as int?,
             name: row['name'] as String?,
+            address: row['address'] as String?,
             department: row['department'] as String?,
             salary: row['salary'] as int?,
             photoUrl: row['photoUrl'] as String?),
@@ -152,6 +155,7 @@ class _$EmployeeDao extends EmployeeDao {
         mapper: (Map<String, Object?> row) => Employee(
             id: row['id'] as int?,
             name: row['name'] as String?,
+            address: row['address'] as String?,
             department: row['department'] as String?,
             salary: row['salary'] as int?,
             photoUrl: row['photoUrl'] as String?),

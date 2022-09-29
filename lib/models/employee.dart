@@ -5,14 +5,22 @@ class Employee {
   @primaryKey
   int? id;
   String? name;
+  String? address;
   String? department;
   int? salary;
   String? photoUrl;
-  Employee({this.id, this.name, this.department, this.salary, this.photoUrl});
+  Employee(
+      {this.id,
+      this.name,
+      this.address,
+      this.department,
+      this.salary,
+      this.photoUrl});
 
   toJson() => {
         'id': id,
         'name': name,
+        'address': address,
         'department': department,
         'salary': salary,
         'photoUrl': photoUrl,
@@ -22,6 +30,7 @@ class Employee {
     final emp = Employee(
         id: json['id'],
         name: json['name'],
+        address: json['address'],
         department: json['department'],
         salary: json['salary'],
         photoUrl: json['photoUrl']);
