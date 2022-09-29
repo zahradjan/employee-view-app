@@ -8,6 +8,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobilesoft_flutter_test/controllers/employees_controller.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 // : FileImage(File(employeesController.profilePicPath.value))
 class EmployeeImagePicker extends StatelessWidget {
@@ -15,13 +16,18 @@ class EmployeeImagePicker extends StatelessWidget {
   File? pickedFile;
   ImagePicker imagePicker = ImagePicker();
   EmployeesController employeesController = Get.find();
-  Future<void> pickImage() async {
+  Future<void> pickImage(ImageSource imageSource) async {
     try {
-      var image = await imagePicker.pickImage(source: ImageSource.camera);
+      var image = await imagePicker.pickImage(source: imageSource);
       if (image == null) return;
       employeesController.setProfileImagePath(image.path);
     } on PlatformException catch (e) {
       //TODO:Show snackbar
+      Get.snackbar(
+        'Failed to pick image',
+        '$e',
+        snackPosition: SnackPosition.BOTTOM,
+      );
       print("Failed to pick image $e");
     }
   }
@@ -30,7 +36,41 @@ class EmployeeImagePicker extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () async {
-        pickImage();
+        showMaterialModalBottomSheet(
+          context: context,
+          builder: (context) => SingleChildScrollView(
+            controller: ModalScrollController.of(context),
+            child: Column(
+              children: [
+                ListTile(
+                  title: Row(
+                    children: [
+                      Icon(Icons.camera_alt),
+                      Text('Camera'),
+                    ],
+                  ),
+                  onTap: () {
+                    Get.back();
+                    pickImage(ImageSource.camera);
+                  },
+                ),
+                ListTile(
+                  title: Row(
+                    children: [
+                      Icon(Icons.image),
+                      Text('Gallery'),
+                    ],
+                  ),
+                  onTap: () {
+                    Get.back();
+                    pickImage(ImageSource.gallery);
+                  },
+                )
+              ],
+            ),
+          ),
+        );
+        // pickImage();
         print("Tap");
       },
       child: Stack(
