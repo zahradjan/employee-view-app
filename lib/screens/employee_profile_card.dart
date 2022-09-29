@@ -20,63 +20,63 @@ class _EmployeeProfileCardState extends State<EmployeeProfileCard> {
           centerTitle: true,
           title: Text(widget.employee.name!),
         ),
-        body: Column(mainAxisAlignment: MainAxisAlignment.start,
-            // crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ClipRRect(
-                          child: Container(
-                              width: MediaQuery.of(context).size.width - 20,
-                              height: 300,
-                              child: widget.employee.photoUrl != null
-                                  ? Image.network(
-                                      "http://testapp.mobilesoft.cz${widget.employee.photoUrl}")
-                                  : Icon(
-                                      Icons.person_outline_rounded,
-                                      size: 300,
-                                    ))),
-                    ),
-                  ]),
-              Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20, bottom: 8),
-                child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text("Department",
+        body: Column(children: [
+          Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ClipRRect(
+                      child: SizedBox(
+                          width: MediaQuery.of(context).size.width - 20,
+                          height: 300,
+                          child: widget.employee.photoUrl != null
+                              //TODO: sometimes bad image type is present
+                              ? Image.network(
+                                  "http://testapp.mobilesoft.cz${widget.employee.photoUrl}")
+                              : const Icon(
+                                  Icons.person_outline_rounded,
+                                  size: 300,
+                                ))),
+                ),
+              ]),
+          Padding(
+            padding:
+                const EdgeInsets.only(left: 20, right: 20, bottom: 8, top: 20),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Text("Department",
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(fontSize: 20)),
+                  widget.employee.department != null
+                      ? Text(widget.employee.department!,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
-                          style: TextStyle(fontSize: 20)),
-                      widget.employee.department != null
-                          ? Text(widget.employee.department!,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(fontSize: 20))
-                          : Container(),
-                    ]),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: 20, right: 20, bottom: 8),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Salary",
+                          style: const TextStyle(fontSize: 20))
+                      : Container(),
+                ]),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20, bottom: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text("Salary",
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyle(fontSize: 20)),
+                widget.employee.salary != null
+                    ? Text(widget.employee.salary.toString(),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontSize: 20)),
-                    widget.employee.salary != null
-                        ? Text(widget.employee.salary.toString(),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(fontSize: 20))
-                        : Container(),
-                  ],
-                ),
-              ),
-            ]));
+                        style: const TextStyle(fontSize: 20))
+                    : Container(),
+              ],
+            ),
+          ),
+        ]));
   }
 }

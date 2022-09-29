@@ -9,14 +9,9 @@ class EmployeeListCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => EmployeeProfileCard(
-            employee: emp,
-          ),
-        ),
-      ),
+      onTap: () {
+        Get.to(() => EmployeeProfileCard(employee: emp));
+      },
       child: Column(children: [
         Container(
           // margin: const EdgeInsets.only(left: 20, right: 20),
@@ -31,17 +26,17 @@ class EmployeeListCard extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ClipRRect(
+                    child: SizedBox(
+                  width: 150,
+                  height: 150,
                   child: emp.photoUrl != null
-                      ? Container(
-                          width: 150,
-                          height: 150,
-                          child: Image.network(
-                              "http://testapp.mobilesoft.cz${emp.photoUrl}"))
-                      : Icon(
+                      ? Image.network(
+                          "http://testapp.mobilesoft.cz${emp.photoUrl}")
+                      : const Icon(
                           Icons.person_outline_rounded,
                           size: 150,
                         ),
-                ),
+                )),
               ),
               Expanded(
                 child: Padding(
@@ -54,7 +49,7 @@ class EmployeeListCard extends StatelessWidget {
                       ),
                       Text(
                         emp.name!,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 25,
                           fontWeight: FontWeight.w500,
                         ),
@@ -67,7 +62,7 @@ class EmployeeListCard extends StatelessWidget {
                         child: Text(emp.department ?? '',
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
-                            style: TextStyle(fontSize: 20)),
+                            style: const TextStyle(fontSize: 20)),
                       ),
                     ],
                   ),

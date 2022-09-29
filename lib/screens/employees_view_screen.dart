@@ -6,6 +6,7 @@ import 'package:mobilesoft_flutter_test/controllers/employees_controller.dart';
 import 'package:mobilesoft_flutter_test/dao/employee_dao.dart';
 import 'package:mobilesoft_flutter_test/models/employee.dart';
 import 'package:mobilesoft_flutter_test/screens/employee_list_card.dart';
+import 'package:mobilesoft_flutter_test/screens/new_employee_card.dart';
 
 class EmployeesViewScreen extends StatefulWidget {
   const EmployeesViewScreen({Key? key, required this.title}) : super(key: key);
@@ -47,8 +48,21 @@ class _EmployeesViewScreenState extends State<EmployeesViewScreen> {
 
 AppBar buildAppBar() {
   return AppBar(
-    title: Row(
-      children: [Text("Employees")],
-    ),
+    title: const Text("Employees"),
+
+    automaticallyImplyLeading: false,
+    centerTitle: true,
+    // iconTheme:IconTheme(data: IconThemeData(size: 10), child: Ic),
+    actions: [
+      IconButton(
+          alignment: Alignment.centerLeft,
+          iconSize: 50,
+          onPressed: () {
+            Get.to(() => const NewEmployeeCard());
+          },
+          icon: const Icon(
+            Icons.add,
+          ))
+    ],
   );
 }
