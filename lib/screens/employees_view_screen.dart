@@ -21,28 +21,17 @@ class _EmployeesViewScreenState extends State<EmployeesViewScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(),
-      body: Obx(() => employeesController.employeeDao.obs.value == null
-          ? const Center(child: LinearProgressIndicator())
-          : FutureBuilder(
-              future: employeesController.employeeDao?.getAllEmployees(),
-              // initialData: [],
-              builder: (context, snapshot) {
-                print(employeesController.employeeDao);
-                print(snapshot);
-                if (snapshot.hasData) {
-                  var snapshotsEmployee = snapshot.data as List<Employee>;
-                  return ListView.builder(
-                      itemCount: snapshotsEmployee.length,
-                      itemBuilder: ((context, index) {
-                        print(snapshotsEmployee[index]);
-                        return EmployeeListCard(emp: snapshotsEmployee[index]);
-                      }));
-                } else {
-                  return const Center(child: LinearProgressIndicator());
-                }
-              })),
-    );
+        appBar: buildAppBar(),
+        body: Obx(() => employeesController.employees.isNotEmpty
+            ? ListView.builder(
+                itemCount: employeesController.employees.length,
+                itemBuilder: ((context, index) {
+                  print(employeesController.employees[index]);
+
+                  return EmployeeListCard(
+                      emp: employeesController.employees[index]);
+                }))
+            : const Center(child: CircularProgressIndicator())));
   }
 }
 

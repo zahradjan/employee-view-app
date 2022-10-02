@@ -10,8 +10,8 @@ import 'package:mobilesoft_flutter_test/models/employee.dart';
 class EmployeesController extends GetxController {
   EmployeeProvider employeeProvider = EmployeeProvider();
   EmployeeDao? employeeDao;
+  List<Employee> employees = <Employee>[].obs;
   var isDataFetching = false.obs;
-
   var isImagePathSet = false.obs;
   var imagePath = "".obs;
 
@@ -22,12 +22,16 @@ class EmployeesController extends GetxController {
 
   @override
   Future<void> onInit() async {
-    super.onInit();
     final database =
         await $FloorAppDatabase.databaseBuilder("employee_database.db").build();
+    // employeeDao = database.employeeDao;
     employeeDao = database.employeeDao;
+    var dbResponse = await employeeDao!.getAllEmployees();
+    employees.assignAll(dbResponse);
 
+    // isLoadingDataFromLocal(false);
     // getAPI();
+    super.onInit();
   }
 
   getAPI() async {
