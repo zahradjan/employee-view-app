@@ -22,19 +22,18 @@ class EmployeesController extends GetxController {
 
   @override
   Future<void> onInit() async {
+    await getEmployees();
     final database =
         await $FloorAppDatabase.databaseBuilder("employee_database.db").build();
-    // employeeDao = database.employeeDao;
+
     employeeDao = database.employeeDao;
     var dbResponse = await employeeDao!.getAllEmployees();
     employees.assignAll(dbResponse);
 
-    // isLoadingDataFromLocal(false);
-    // getAPI();
     super.onInit();
   }
 
-  getAPI() async {
+  getEmployees() async {
     try {
       isDataFetching(true);
       var response = await employeeProvider.fetchEmployees();
@@ -43,16 +42,17 @@ class EmployeesController extends GetxController {
         //TODO: parse employee
         var result = response.body;
         print(result.runtimeType);
-        // var jsonDecoded = jsonDecode(result);
-        // print(jsonDecoded);
+        var jsonDecoded = jsonDecode(result);
+        print(jsonDecoded);
 
-        // print(result);
-        // result.forEach((employee) {
-        //   employeeDao!.addNewEmployee(Employee.fromJson(employee));
-        // });
+        print(result);
+        result.forEach((employee) {
+          employeeDao!.addNewEmployee(Employee.fromJson(employee));
+        });
       }
     } catch (e) {
       //TODO: snackbar to show user
+      GetSnackBar(title: "Error", message: "$e");
       printError(info: 'Error while getting data is $e');
     } finally {
       isDataFetching(false);

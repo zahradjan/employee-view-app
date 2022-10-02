@@ -13,6 +13,6 @@ abstract class EmployeeDao {
   @Query('SELECT photoUrl FROM Employee WHERE id=:id')
   Future<Employee?> getPhotoOfEmployee(int id);
 
-  @insert
+  @Insert(onConflict: OnConflictStrategy.ignore)
   Future<void> addNewEmployee(Employee employee);
 }

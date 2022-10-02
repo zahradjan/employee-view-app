@@ -164,6 +164,6 @@ class _$EmployeeDao extends EmployeeDao {
 
   @override
   Future<void> addNewEmployee(Employee employee) async {
-    await _employeeInsertionAdapter.insert(employee, OnConflictStrategy.abort);
+    await _employeeInsertionAdapter.insert(employee, OnConflictStrategy.ignore);
   }
 }
