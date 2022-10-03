@@ -7,6 +7,10 @@ class EmployeeProvider extends GetConnect {
   Future<Response> getEmployee(int id) =>
       get('http://testapp.mobilesoft.cz/api/employees/$id');
 
-  Future<Response> createNewEmployee(Map data) =>
-      post("http://testapp.mobilesoft.cz/api/employees", data);
+  Future<Response> createNewEmployee(FormData data) {
+    return post(
+      "https://testapp.mobilesoft.cz/api/employees",
+      data,
+    );
+  }
 }

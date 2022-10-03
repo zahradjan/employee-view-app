@@ -20,7 +20,8 @@ class EmployeeImagePicker extends StatelessWidget {
     try {
       var image = await imagePicker.pickImage(source: imageSource);
       if (image == null) return;
-      employeesController.setProfileImagePath(image.path);
+      employeesController.setImage(image);
+      // employeesController.setProfileImagePath(image.path);
     } on PlatformException catch (e) {
       //TODO:Show snackbar
       Get.snackbar(
@@ -80,7 +81,8 @@ class EmployeeImagePicker extends StatelessWidget {
               height: 150,
               child: employeesController.isImagePathSet.value != true
                   ? Icon(Icons.person, size: 150)
-                  : Image.file(File(employeesController.imagePath.value)))),
+                  : Image.file(
+                      File(employeesController.empPhoto.value!.path)))),
           AddPhotoWidget()
         ],
       ),
