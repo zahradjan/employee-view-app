@@ -23,6 +23,7 @@ class _EmployeesViewScreenState extends State<EmployeesViewScreen> {
         appBar: buildAppBar(),
         body: Obx(() => employeesController.employees.isNotEmpty
             ? ListView.builder(
+                padding: const EdgeInsets.only(top: 4.0),
                 itemCount: employeesController.employees.length,
                 itemBuilder: ((context, index) {
                   print(employeesController.employees[index]);

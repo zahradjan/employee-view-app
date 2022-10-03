@@ -14,9 +14,8 @@ class EmployeeListCard extends StatelessWidget {
       },
       child: Column(children: [
         Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(4.0),
           child: Container(
-            padding: const EdgeInsets.only(left: 20, right: 20),
             // padding: const EdgeInsets.only(left: 20, right: 20),
             height: 150,
             width: MediaQuery.of(context).size.width,

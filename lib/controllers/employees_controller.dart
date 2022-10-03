@@ -15,6 +15,7 @@ class EmployeesController extends GetxController {
   EmployeeProvider employeeProvider = EmployeeProvider();
   EmployeeDao? employeeDao;
   List<Employee> employees = <Employee>[].obs;
+  //TODO: this better for uniqueness
   var isImagePathSet = false.obs;
   var empName = "".obs;
   var empAddress = "".obs;
@@ -37,11 +38,11 @@ class EmployeesController extends GetxController {
         await $FloorAppDatabase.databaseBuilder("employee_database.db").build();
 
     employeeDao = database.employeeDao;
+    await getEmployees();
     var dbResponse = await employeeDao!.getAllEmployees();
-    if (dbResponse == []) {
-      await getEmployees();
-      dbResponse = await employeeDao!.getAllEmployees();
-    }
+    // if (dbResponse == []) {
+    // dbResponse = await employeeDao!.getAllEmployees();
+    // }
     employees.assignAll(dbResponse);
 
     super.onInit();
@@ -65,12 +66,11 @@ class EmployeesController extends GetxController {
 
   createNewEmployee() async {
     try {
-      //TODO:employee map entry bad parsing
       var formData = FormData({
         'json': jsonEncode({
           "name": empName.value,
-          "department": empAddress.value,
-          "address": empDepartment.value,
+          "address": empAddress.value,
+          "department": empDepartment.value,
           "salary": empSalary.value
         }),
       });
