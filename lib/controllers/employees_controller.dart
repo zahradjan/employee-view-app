@@ -14,7 +14,6 @@ class EmployeesController extends GetxController {
   EmployeeDao? employeeDao;
   List<Employee> employees = <Employee>[].obs;
   var isImagePathSet = false.obs;
-  var empImagePath = "".obs;
   var empName = "".obs;
   var empAddress = "".obs;
   var empDepartment = "".obs;

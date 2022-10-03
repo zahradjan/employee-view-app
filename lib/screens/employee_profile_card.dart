@@ -32,9 +32,24 @@ class _EmployeeProfileCardState extends State<EmployeeProfileCard> {
                           width: MediaQuery.of(context).size.width - 20,
                           height: 300,
                           child: widget.employee.photoUrl != null
-                              //TODO: sometimes bad image type is present
                               ? Image.network(
-                                  "http://testapp.mobilesoft.cz${widget.employee.photoUrl}")
+                                  "http://testapp.mobilesoft.cz${widget.employee.photoUrl}",
+                                  loadingBuilder: (context, child,
+                                          loadingProgress) =>
+                                      (loadingProgress == null)
+                                          ? child
+                                          : Center(
+                                              heightFactor: 30,
+                                              widthFactor: 30,
+                                              child:
+                                                  CircularProgressIndicator()),
+                                  errorBuilder: (context, error, stackTrace) =>
+                                      const Icon(
+                                    Icons.close,
+                                    color: Colors.red,
+                                    size: 300,
+                                  ),
+                                )
                               : const Icon(
                                   Icons.person_outline_rounded,
                                   size: 300,

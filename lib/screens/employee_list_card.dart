@@ -34,7 +34,20 @@ class EmployeeListCard extends StatelessWidget {
                     height: 150,
                     child: emp.photoUrl != null
                         ? Image.network(
-                            "http://testapp.mobilesoft.cz${emp.photoUrl}")
+                            "http://testapp.mobilesoft.cz${emp.photoUrl}",
+                            loadingBuilder: (context, child, loadingProgress) =>
+                                (loadingProgress == null)
+                                    ? child
+                                    : Center(
+                                        heightFactor: 10,
+                                        widthFactor: 10,
+                                        child: CircularProgressIndicator()),
+                            errorBuilder: (context, error, stackTrace) =>
+                                const Icon(
+                                  Icons.close,
+                                  color: Colors.red,
+                                  size: 150,
+                                ))
                         : const Icon(
                             Icons.person_outline_rounded,
                             size: 150,

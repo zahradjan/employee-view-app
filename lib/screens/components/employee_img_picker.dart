@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobilesoft_flutter_test/controllers/employees_controller.dart';
@@ -47,7 +45,7 @@ class EmployeeImagePicker extends StatelessWidget {
                   title: Row(
                     children: [
                       Icon(Icons.camera_alt),
-                      Text('Camera'),
+                      Text('Camera', style: TextStyle(color: Colors.black)),
                     ],
                   ),
                   onTap: () {
@@ -59,7 +57,7 @@ class EmployeeImagePicker extends StatelessWidget {
                   title: Row(
                     children: [
                       Icon(Icons.image),
-                      Text('Gallery'),
+                      Text('Gallery', style: TextStyle(color: Colors.black)),
                     ],
                   ),
                   onTap: () {
