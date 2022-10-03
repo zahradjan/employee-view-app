@@ -9,8 +9,7 @@ import 'package:mobilesoft_flutter_test/screens/employee_list_card.dart';
 import 'package:mobilesoft_flutter_test/screens/new_employee_card.dart';
 
 class EmployeesViewScreen extends StatefulWidget {
-  const EmployeesViewScreen({Key? key, required this.title}) : super(key: key);
-  final String title;
+  const EmployeesViewScreen({Key? key}) : super(key: key);
 
   @override
   State<EmployeesViewScreen> createState() => _EmployeesViewScreenState();
