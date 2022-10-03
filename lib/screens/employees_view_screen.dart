@@ -38,7 +38,6 @@ class _EmployeesViewScreenState extends State<EmployeesViewScreen> {
 AppBar buildAppBar() {
   return AppBar(
     title: const Text("Employees"),
-
     automaticallyImplyLeading: false,
     centerTitle: true,
     // iconTheme:IconTheme(data: IconThemeData(size: 10), child: Ic),

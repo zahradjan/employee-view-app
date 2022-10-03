@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:mobilesoft_flutter_test/dao/employee_dao.dart';
 import 'package:mobilesoft_flutter_test/db/database.dart';
 import 'package:mobilesoft_flutter_test/screens/employees_view_screen.dart';
+import 'package:mobilesoft_flutter_test/theme.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,9 +21,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'Employee View',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: lightThemeData(context),
       home: EmployeesViewScreen(title: 'Flutter Demo Home Page'),
     );
   }
