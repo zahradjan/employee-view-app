@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'package:mobilesoft_flutter_test/controllers/employee_controller.dart';
 import 'package:mobilesoft_flutter_test/controllers/employees_controller.dart';
 import 'package:mobilesoft_flutter_test/screens/components/employee_img_picker.dart';
 
@@ -13,10 +14,8 @@ class NewEmployeeCard extends StatefulWidget {
 }
 
 class _NewEmployeeCardState extends State<NewEmployeeCard> {
-  String name = '';
-  String department = '';
-  int salary = 0;
   EmployeesController employeesController = Get.put(EmployeesController());
+  EmployeeController employeeController = Get.put(EmployeeController());
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -43,13 +42,13 @@ class _NewEmployeeCardState extends State<NewEmployeeCard> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               border: OutlineInputBorder(),
                               labelText: 'Name',
                             ),
                             onChanged: (value) =>
-                                {employeesController.setEmpName = value},
-                            style: TextStyle(
+                                {employeeController.setEmpName = value},
+                            style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w500,
                             ),
@@ -58,14 +57,14 @@ class _NewEmployeeCardState extends State<NewEmployeeCard> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: TextFormField(
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 border: OutlineInputBorder(),
                                 labelText: 'Address',
                               ),
                               onChanged: (value) =>
-                                  {employeesController.setEmpAddress = value},
+                                  {employeeController.setEmpAddress = value},
                               minLines: 1,
-                              style: TextStyle(fontSize: 16)),
+                              style: const TextStyle(fontSize: 16)),
                         ),
                       ],
                     ),
@@ -80,16 +79,16 @@ class _NewEmployeeCardState extends State<NewEmployeeCard> {
               children: [
                 Expanded(
                   child: TextFormField(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Department',
                       ),
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                       ),
                       onChanged: (value) =>
-                          {employeesController.setEmpDepartment = value}),
+                          {employeeController.setEmpDepartment = value}),
                 ),
               ],
             ),
@@ -100,18 +99,17 @@ class _NewEmployeeCardState extends State<NewEmployeeCard> {
               children: [
                 Expanded(
                   child: TextFormField(
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         labelText: 'Salary',
                       ),
                       keyboardType: TextInputType.number,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                       ),
-                      onChanged: (value) => {
-                            employeesController.setEmpSalary = int.parse(value)
-                          }),
+                      onChanged: (value) =>
+                          {employeeController.setEmpSalary = int.parse(value)}),
                 ),
               ],
             ),
@@ -123,12 +121,12 @@ class _NewEmployeeCardState extends State<NewEmployeeCard> {
                 Expanded(
                   child: MaterialButton(
                     onPressed: () async {
-                      employeesController.createNewEmployee();
-                      // employeesController.dispose();
+                      employeesController.createNewEmployee(employeeController);
+                      print(employeeController.empName);
                     },
                     minWidth: double.infinity,
                     color: Theme.of(context).primaryColor,
-                    child: Text("CREATE"),
+                    child: const Text("CREATE"),
                   ),
                 ),
               ],

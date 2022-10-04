@@ -20,7 +20,7 @@ class EmployeeListCard extends StatelessWidget {
             height: 150,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(8.0)),
+              borderRadius: const BorderRadius.all(Radius.circular(8.0)),
               color: Theme.of(context).colorScheme.secondary,
             ),
             child: Row(
@@ -37,7 +37,7 @@ class EmployeeListCard extends StatelessWidget {
                             loadingBuilder: (context, child, loadingProgress) =>
                                 (loadingProgress == null)
                                     ? child
-                                    : Center(
+                                    : const Center(
                                         heightFactor: 10,
                                         widthFactor: 10,
                                         child: CircularProgressIndicator()),

@@ -28,7 +28,7 @@ class CardImage extends StatelessWidget {
       errorWidget: (context, url, error) => Container(
         height: 171,
         width: 171,
-        child: Icon(
+        child: const Icon(
           Icons.person_outline_rounded,
         ),
       ),

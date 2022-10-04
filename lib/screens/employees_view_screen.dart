@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'package:mobilesoft_flutter_test/controllers/employee_controller.dart';
 import 'package:mobilesoft_flutter_test/controllers/employees_controller.dart';
 import 'package:mobilesoft_flutter_test/dao/employee_dao.dart';
 import 'package:mobilesoft_flutter_test/models/employee.dart';
@@ -17,6 +18,7 @@ class EmployeesViewScreen extends StatefulWidget {
 
 class _EmployeesViewScreenState extends State<EmployeesViewScreen> {
   EmployeesController employeesController = Get.put(EmployeesController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

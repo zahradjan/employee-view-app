@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobilesoft_flutter_test/controllers/employee_api_provider.dart';
+import 'package:mobilesoft_flutter_test/controllers/employee_controller.dart';
 import 'package:mobilesoft_flutter_test/dao/employee_dao.dart';
 import 'package:mobilesoft_flutter_test/db/database.dart';
 import 'package:mobilesoft_flutter_test/models/employee.dart';
@@ -16,21 +17,6 @@ class EmployeesController extends GetxController {
   EmployeeDao? employeeDao;
   List<Employee> employees = <Employee>[].obs;
   //TODO: this better for uniqueness
-  var isImagePathSet = false.obs;
-  var empName = "".obs;
-  var empAddress = "".obs;
-  var empDepartment = "".obs;
-  var empSalary = 0.obs;
-  Rx<XFile?> empPhoto = Rx<XFile?>(null);
-  set setEmpName(value) => empName.value = value;
-  set setEmpAddress(value) => empAddress.value = value;
-  set setEmpDepartment(value) => empDepartment.value = value;
-  set setEmpSalary(value) => empSalary.value = value;
-
-  void setImage(XFile image) {
-    empPhoto.value = image;
-    isImagePathSet.value = true;
-  }
 
   @override
   Future<void> onInit() async {
@@ -38,11 +24,11 @@ class EmployeesController extends GetxController {
         await $FloorAppDatabase.databaseBuilder("employee_database.db").build();
 
     employeeDao = database.employeeDao;
-    await getEmployees();
     var dbResponse = await employeeDao!.getAllEmployees();
-    // if (dbResponse == []) {
-    // dbResponse = await employeeDao!.getAllEmployees();
-    // }
+    if (dbResponse.isEmpty) {
+      await getEmployees();
+      dbResponse = await employeeDao!.getAllEmployees();
+    }
     employees.assignAll(dbResponse);
 
     super.onInit();
@@ -64,23 +50,26 @@ class EmployeesController extends GetxController {
     }
   }
 
-  createNewEmployee() async {
+  createNewEmployee(EmployeeController employeeController) async {
+    var employee = {
+      "name": employeeController.empName.value,
+      "address": employeeController.empAddress.value,
+      "department": employeeController.empDepartment.value,
+      "salary": employeeController.empSalary.value
+    };
+    employee.removeWhere((key, value) => value == "" || value == 0);
+
     try {
       var formData = FormData({
-        'json': jsonEncode({
-          "name": empName.value,
-          "address": empAddress.value,
-          "department": empDepartment.value,
-          "salary": empSalary.value
-        }),
+        'json': jsonEncode(employee),
       });
-      if (isImagePathSet.value == true) {
+      if (employeeController.isImagePathSet.value == true) {
         formData.files.add(MapEntry(
             "photo",
-            MultipartFile(File(empPhoto.value!.path),
-                filename: empPhoto.value!.name)));
+            MultipartFile(File(employeeController.empPhoto.value!.path),
+                filename: employeeController.empPhoto.value!.name)));
       }
-      // print(formData.fields.first);
+
       var response = await employeeProvider.createNewEmployee(formData);
       print(response);
 
@@ -89,10 +78,9 @@ class EmployeesController extends GetxController {
           var employee = Employee.fromJson(response.body);
           employeeDao!.addNewEmployee(employee);
           employees.add(employee);
+          Get.back();
           Get.snackbar("Employee created", "Employee successfully created",
               snackPosition: SnackPosition.BOTTOM);
-
-          Get.back();
         } catch (e) {
           Get.snackbar("Error saving employee", "$e",
               snackPosition: SnackPosition.BOTTOM);
@@ -100,7 +88,6 @@ class EmployeesController extends GetxController {
       }
 
       if (response.statusCode == 400) {
-        //TODO:Maybe alert view
         Get.snackbar("Error creating employee ${response.statusCode}",
             response.body['message'],
             snackPosition: SnackPosition.BOTTOM);
@@ -113,14 +100,5 @@ class EmployeesController extends GetxController {
       Get.snackbar("Error creating employee", "$e",
           snackPosition: SnackPosition.BOTTOM);
     }
-  }
-
-  void resetNewEmployeeValues() {
-    setEmpName = "";
-    setEmpAddress = "";
-    setEmpDepartment = "";
-    setEmpSalary = 0;
-    isImagePathSet = false.obs;
-    empPhoto.value = null;
   }
 }

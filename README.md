@@ -9,16 +9,13 @@
 </p>
 <p>Employeer is a simple app to list all employees from server. Application stores them in local database. </p>
 
-<p>There are 3 screens. One for listing all employees. Second for creating new employee record. And third for employee record detail info.</p>
+<p>There are 3 screens. One for listing all employees. Second for  employee record detail info. And third for creating new employee record.</p>
 <p align="center">
 <img height="400px" src="assets/Employeer main screen.PNG"></>
 <img height="400px" src="assets/Employeer detail screen.PNG"></>
 <img height="400px" src="assets/Employeer new employee screen.PNG"></>
 </p>
-### Autoři
-
-- **Jan Zahradník** - _Celý projekt_ - [Jan Zahradník](https://github.com/zahradjan)
 
 <p align="center">
-<a href="https://"><img src="https://img.shields.io/badge/Jan_Zahradn%C3%ADk-2022-f6c863?style=for-the-badge" alt="Jan Zahradník - 2022"></a>
+<a href="https://github.com/zahradjan"><img src="https://img.shields.io/badge/Jan_Zahradn%C3%ADk-2022-f6c863?style=for-the-badge" alt="Jan Zahradník - 2022"></a>
 </p>

@@ -38,7 +38,7 @@ class _EmployeeProfileCardState extends State<EmployeeProfileCard> {
                                           loadingProgress) =>
                                       (loadingProgress == null)
                                           ? child
-                                          : Center(
+                                          : const Center(
                                               heightFactor: 30,
                                               widthFactor: 30,
                                               child:

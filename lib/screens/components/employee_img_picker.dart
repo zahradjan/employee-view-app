@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:mobilesoft_flutter_test/controllers/employee_controller.dart';
 import 'package:mobilesoft_flutter_test/controllers/employees_controller.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
@@ -13,21 +14,18 @@ class EmployeeImagePicker extends StatelessWidget {
   EmployeeImagePicker({Key? key}) : super(key: key);
   File? pickedFile;
   ImagePicker imagePicker = ImagePicker();
-  EmployeesController employeesController = Get.find();
+  EmployeeController employeeController = Get.find();
   Future<void> pickImage(ImageSource imageSource) async {
     try {
       var image = await imagePicker.pickImage(source: imageSource);
       if (image == null) return;
-      employeesController.setImage(image);
-      // employeesController.setProfileImagePath(image.path);
+      employeeController.setImage(image);
     } on PlatformException catch (e) {
-      //TODO:Show snackbar
       Get.snackbar(
         'Failed to pick image',
         '$e',
         snackPosition: SnackPosition.BOTTOM,
       );
-      print("Failed to pick image $e");
     }
   }
 
@@ -43,7 +41,7 @@ class EmployeeImagePicker extends StatelessWidget {
               children: [
                 ListTile(
                   title: Row(
-                    children: [
+                    children: const [
                       Icon(Icons.camera_alt),
                       Text('Camera', style: TextStyle(color: Colors.black)),
                     ],
@@ -55,7 +53,7 @@ class EmployeeImagePicker extends StatelessWidget {
                 ),
                 ListTile(
                   title: Row(
-                    children: [
+                    children: const [
                       Icon(Icons.image),
                       Text('Gallery', style: TextStyle(color: Colors.black)),
                     ],
@@ -77,11 +75,10 @@ class EmployeeImagePicker extends StatelessWidget {
           Obx(() => SizedBox(
               width: 150,
               height: 150,
-              child: employeesController.isImagePathSet.value != true
-                  ? Icon(Icons.person, size: 150)
-                  : Image.file(
-                      File(employeesController.empPhoto.value!.path)))),
-          AddPhotoWidget()
+              child: employeeController.isImagePathSet.value != true
+                  ? const Icon(Icons.person, size: 150)
+                  : Image.file(File(employeeController.empPhoto.value!.path)))),
+          const AddPhotoWidget()
         ],
       ),
     );
@@ -105,7 +102,7 @@ class AddPhotoWidget extends StatelessWidget {
             shape: BoxShape.circle,
             border: Border.all(width: 3),
             color: Theme.of(context).scaffoldBackgroundColor),
-        child: Icon(Icons.add_a_photo, size: 30.0, color: Colors.black),
+        child: const Icon(Icons.add_a_photo, size: 30.0, color: Colors.black),
       ),
     );
   }
