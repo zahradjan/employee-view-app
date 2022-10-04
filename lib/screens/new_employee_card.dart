@@ -122,7 +122,6 @@ class _NewEmployeeCardState extends State<NewEmployeeCard> {
                   child: MaterialButton(
                     onPressed: () async {
                       employeesController.createNewEmployee(employeeController);
-                      print(employeeController.empName);
                     },
                     minWidth: double.infinity,
                     color: Theme.of(context).primaryColor,

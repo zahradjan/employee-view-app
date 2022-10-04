@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:mobilesoft_flutter_test/dao/employee_dao.dart';
-import 'package:mobilesoft_flutter_test/db/database.dart';
 import 'package:mobilesoft_flutter_test/screens/employees_view_screen.dart';
 import 'package:mobilesoft_flutter_test/theme.dart';
 

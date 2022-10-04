@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
-import 'package:mobilesoft_flutter_test/controllers/employee_controller.dart';
 import 'package:mobilesoft_flutter_test/controllers/employees_controller.dart';
-import 'package:mobilesoft_flutter_test/dao/employee_dao.dart';
-import 'package:mobilesoft_flutter_test/models/employee.dart';
 import 'package:mobilesoft_flutter_test/screens/employee_list_card.dart';
 import 'package:mobilesoft_flutter_test/screens/new_employee_card.dart';
 
@@ -28,8 +23,6 @@ class _EmployeesViewScreenState extends State<EmployeesViewScreen> {
                 padding: const EdgeInsets.only(top: 4.0),
                 itemCount: employeesController.employees.length,
                 itemBuilder: ((context, index) {
-                  print(employeesController.employees[index]);
-
                   return EmployeeListCard(
                       emp: employeesController.employees[index]);
                 }))

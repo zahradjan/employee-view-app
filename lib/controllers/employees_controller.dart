@@ -1,22 +1,17 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:mobilesoft_flutter_test/controllers/employee_api_provider.dart';
 import 'package:mobilesoft_flutter_test/controllers/employee_controller.dart';
 import 'package:mobilesoft_flutter_test/dao/employee_dao.dart';
 import 'package:mobilesoft_flutter_test/db/database.dart';
 import 'package:mobilesoft_flutter_test/models/employee.dart';
-import 'package:mobilesoft_flutter_test/screens/components/employee_img_picker.dart';
-import 'package:mobilesoft_flutter_test/screens/employees_view_screen.dart';
 
 class EmployeesController extends GetxController {
   EmployeeProvider employeeProvider = EmployeeProvider();
   EmployeeDao? employeeDao;
   List<Employee> employees = <Employee>[].obs;
-  //TODO: this better for uniqueness
 
   @override
   Future<void> onInit() async {
@@ -37,7 +32,7 @@ class EmployeesController extends GetxController {
   getEmployees() async {
     try {
       var response = await employeeProvider.fetchEmployees();
-      print(response);
+
       if (response.statusCode == 200) {
         var result = response.body;
         result.forEach((employee) {
@@ -71,7 +66,6 @@ class EmployeesController extends GetxController {
       }
 
       var response = await employeeProvider.createNewEmployee(formData);
-      print(response);
 
       if (response.statusCode == 200) {
         try {
